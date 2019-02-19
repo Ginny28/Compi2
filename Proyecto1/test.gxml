@@ -1,0 +1,59 @@
+﻿<ventana id="principal" tipo="principal">
+<contenedor id="UNO">
+<Texto> 
+Nombre
+</Texto>
+<control tipo="texto" alto=25 ancho=40 nombre="primer nombre">
+</control>
+<Texto>
+Apellido
+</Texto>
+<control tipo="texto" alto=25 ancho=40 nombre="Segundo nombre">
+</control>
+<Texto>
+Telefono
+</Texto>
+<control tipo="texto" alto=25 ancho=40 nombre="telefono">
+<Defecto>
+4545-4040
+</defecto>
+</control>
+<Control tipo="desplegable" alto=25 ancho = 40 nombre="pais">
+<texto>ciudad</texto>
+<Listadatos>
+<Dato>Guatemala</Dato>
+<Dato>El Salvador</Dato>
+<Dato>Honduras</Dato>
+<Dato>Costa Rica</Dato>
+</Listadatos>
+</control>
+</contenedor>
+<Contenedor id="dos">
+<Control tipo="textoArea" nombre="ControlTexto2">
+<Defecto>
+Esta es una área de texto 
+que aceptar textos con 
+múltiples líneas
+</Defecto>
+</Control>
+<Control tipo = "Desplegable" Nombre = "ControlDesp" >
+<Listadatos>
+	<Dato> Opción 1 </Dato>
+	<Dato> Opción 2 </Dato>
+	<Dato> Opción 3 </Dato>
+	<Dato> Opción n </Dato>
+</Listadatos>
+<Defecto>
+Opción 1
+</defecto>
+</Control>
+</Contenedor>
+<Contenedor id="tres">
+<Enviar alto=25 ancho=40 accion={llamada(uno,dos+3*4)}>
+<texto>
+Enviar
+</texto>
+</Enviar>
+</contenedor>
+</ventana>
+

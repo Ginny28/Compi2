@@ -1,0 +1,136 @@
+package GXML;
+
+import java.lang.System;
+
+
+
+class Yytoken {
+  Yytoken () {}
+}
+
+%%
+
+%public
+%line
+%char
+%ignorecase
+%state COMENTARIO
+%state COMENTARIODOUBLE
+
+LETRAS = [a-zA-z]+
+NUMBER = [1-9][0-9]*
+IA= "importar"
+IC= "<""/""importar"">"
+VA= "ventana"
+VC= "<""/""ventana"">"
+CA= "contenedor"
+CC ="<""/""contenedor"">"
+TA= "texto"
+TC ="<""/""texto"">"
+COA= "control"
+COC ="<""/""control"">"
+LA= "listadatos"
+LC= "<""/""listadatos"">"
+DA= "dato"
+DC= "<""/""dato"">"
+DEA= "defecto"
+DEC= "<""/""defecto"">"
+MA= "multimedia"
+MC= "<""/""multimedia"">"
+BA= "boton"
+BC= "<""/""boton"">"
+EA= "enviar"
+EC= "<""/""enviar"">"
+%%
+
+<YYINITIAL> {IA} {System.out.println("importa");}
+<YYINITIAL> {IC} {System.out.println("importc");}
+<YYINITIAL> {VA} {System.out.println("vena");}
+<YYINITIAL> {VC} {System.out.println("venc");}
+<YYINITIAL> {CA} {System.out.println("conta");}
+<YYINITIAL> {CC} {System.out.println("contc");}
+<YYINITIAL> {TA} {System.out.println("txta");}
+<YYINITIAL> {TC} {System.out.println("txtc");}
+<YYINITIAL> {COA} {System.out.println("ctra");}
+<YYINITIAL> {COC} {System.out.println("ctrc");}
+<YYINITIAL> {LA} {System.out.println("la");}
+<YYINITIAL> {LC} {System.out.println("lc");}
+<YYINITIAL> {DA} {System.out.println("da");}
+<YYINITIAL> {DC} {System.out.println("dc");}
+<YYINITIAL> {DEA} {System.out.println("defa");}
+<YYINITIAL> {DEC} {System.out.println("defc");}
+<YYINITIAL> {MA} {System.out.println("mula");}
+<YYINITIAL> {MC} {System.out.println("mulc");}
+<YYINITIAL> {BA} {System.out.println("bota");}
+<YYINITIAL> {BC} {System.out.println("botc");}
+<YYINITIAL> {EA} {System.out.println("snda");}
+<YYINITIAL> {EC} {System.out.println("sndc");}
+
+<YYINITIAL> "id" {System.out.println("id");}
+<YYINITIAL> "tipo" {System.out.println("tpo");}
+<YYINITIAL> "principal" {System.out.println("prin");}
+<YYINITIAL> "secundaria" {System.out.println("sec");}
+<YYINITIAL> "color" {System.out.println("col");}
+<YYINITIAL> "accioninicial" {System.out.println("init");}
+<YYINITIAL> "accionfinal"  {System.out.println("fin");}
+<YYINITIAL> "x" {System.out.println("x");}
+<YYINITIAL> "y" {System.out.println("y");}
+<YYINITIAL> "alto" {System.out.println("high");}
+<YYINITIAL> "ancho" {System.out.println("width");}
+<YYINITIAL> "borde" {System.out.println("border");}
+<YYINITIAL> "verdadero" {System.out.println("true");}
+<YYINITIAL> "falso" {System.out.println("false");}
+<YYINITIAL> "nombre" {System.out.println("name");}
+<YYINITIAL> "fuente" {System.out.println("font");}
+<YYINITIAL> "tam" {System.out.println("size");}
+<YYINITIAL> "negrita" {System.out.println("bold");}
+<YYINITIAL> "cursiva" {System.out.println("italic");}
+<YYINITIAL> "numerico" {System.out.println("numer");}
+<YYINITIAL> "textoarea" {System.out.println("area");}
+<YYINITIAL> "desplegable" {System.out.println("desp");}
+<YYINITIAL> "maximo" {System.out.println("max");}
+<YYINITIAL> "minimo" {System.out.println("min");}
+<YYINITIAL> "accion" {System.out.println("action");}
+<YYINITIAL> "referencia" {System.out.println("ref");}
+<YYINITIAL> "musica" {System.out.println("musica");}
+<YYINITIAL> "video" {System.out.println("video");}
+<YYINITIAL> "imagen" {System.out.println("imagen");}
+<YYINITIAL> "path" {System.out.println("path");}
+<YYINITIAL> "auto-reproduccion" {System.out.println("autoplay");}
+
+
+<YYINITIAL> "," {System.out.println("coma"); }
+<YYINITIAL> "+" {System.out.println("plus"); }
+<YYINITIAL> "*" {System.out.println("por"); }
+<YYINITIAL> "-" {System.out.println("guion"); }
+<YYINITIAL> "(" {System.out.println("pabi"); }
+<YYINITIAL> ")" {System.out.println("pcer"); }
+<YYINITIAL> "<" {System.out.println("abi"); }
+<YYINITIAL> ">" {System.out.println("cer"); }
+<YYINITIAL> "\"" {System.out.println("comi"); }
+<YYINITIAL> "{" {System.out.println("{"); }
+<YYINITIAL> "}" { System.out.println("}"); }
+<YYINITIAL> "=" {System.out.println("EQUAL");}
+<YYINITIAL>  {NUMBER} {System.out.println("NUMERO");}
+<YYINITIAL> "'" {System.out.println("COMILLA");}
+<YYINITIAL> {LETRAS} {System.out.println("LETRA");}
+<YYINITIAL> [\n] 		{yychar=0;}
+<YYINITIAL>  [" "\t\r]+ {}
+
+
+
+<YYINITIAL> "##" {yybegin(COMENTARIO);}
+<COMENTARIO> [^\n] {}
+<COMENTARIO> [\n] {yybegin(YYINITIAL); yychar=0; System.out.println("simplecoment");}
+
+<YYINITIAL> "#$" {yybegin(COMENTARIODOUBLE); }
+<COMENTARIODOUBLE> [\n\t\r]+  {}
+<COMENTARIODOUBLE> [^"*"]	{}
+<COMENTARIODOUBLE> "$#"  {yybegin(YYINITIAL); yychar=0; System.out.println("multiblecoment");}
+
+
+.
+  {
+    System.out.println("error lexico en "  + yyline + "," + yychar + " No se reconoce " + yytext());
+    yychar=0;
+  }
