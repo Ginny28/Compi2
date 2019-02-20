@@ -1,1 +1,108 @@
- 
+package GXML;
+
+import java_cup.runtime.*;
+import java.lang.*;
+import java.util.*;
+import java.io.*;
+
+parser code {:
+
+public static void main(String args[]) throws Exception {
+
+// La clase Yylex es creada por el analizador léxico
+
+new parser(new Yylex(new BufferedReader(new InputStreamReader(System.in)))).parse();
+}
+
+public void syntax_error(Symbol s){
+        System.out.println("Error en la col " + (s.right+1) +" fila "+s.left+ ". Identificador "
++s.value  );
+}
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        System.out.println("Error en la Columna " + (s.right+1)+ "fila "+s.left+". Identificador " +
+s.value + " no reconocido.");
+}
+:}
+
+
+
+/*Terminales de cabecera */
+terminal String impO,impC,winO,winC,contaiO,contaiC,txtO,txtC,ctrlO,ctrlC;
+terminal String listO,listC,dataO,dataC,defO,defC,multO,multC,buttO,buttC;
+terminal String sendO,sendC,id,tipo,first,second,color,Ainit,Aend,posX,posY;
+terminal String high,width,border,verdad,falso,nome,font,tam,bold,italic,HEXA;
+terminal String numeric,txtarea,desp,max,mini,act,refe,musica,video,img,path,autoplay;
+terminal String coma,plus,por,gion,parA,parC,abi,cer,apos,keyO,keyC,equal,nro,letter;
+
+//initial
+nonterminal lengua,Binit;
+
+// ventana
+nonterminal BvenObl,BvenOblr,TipoWin,BvenOpt,BvenOptr,BVops;
+
+// contenedor
+nonterminal Bcont,Bother,BconObl,BconOblr,BcontOpt,BcontOptr,Bpos;
+
+//globals
+nonterminal booleans, identi,extras;
+
+
+
+// Aquí irá comecar o lenguagem!!
+
+start with lengua;
+
+lengua ::= Binit:e {:System.out.println("salida:"+ e);:} ;
+
+
+
+// inicio ventana
+
+Binit::= abi winO BvenOblr BVops cer Bcont winC
+	       |error{::};
+
+
+BvenOblr::= BvenOblr BvenObl
+         		|BvenObl;
+
+BvenObl ::=  id equal apos letter apos tipo equal apos TipoWin apos
+            |tipo equal apos TipoWin apos id equal apos letter
+            ;
+
+TipoWin ::= first
+           |second;
+
+
+
+BVops::= BvenOpt
+        |;
+
+BvenOptr ::= BvenOptr BvenOpt
+            |BvenOpt;
+
+BvenOpt ::=  color equal apos letter apos
+            |Ainit keyO keyC
+            |Aend keyO keyC
+            ;
+
+
+
+
+
+// fin ventana
+
+//init Contenedor
+
+Bcont::= abi contaiO  cer  contaiC
+         |error{::};
+
+
+
+// globales
+
+identi ::= equal apos extras apos;
+
+
+extras ::= letter
+          |nro
+          |HEXA;

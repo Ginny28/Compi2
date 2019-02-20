@@ -147,9 +147,10 @@ public String paths,nome;
     //FileReader fr = new FileReader("Archivo_Laberinto.txt");
       //   lexi = new Yylex(fr);
       Yylex lexi = new Yylex(new StringReader(jTextArea1.getText()));
+      parser parsy = new parser(lexi);
 
          try{
-            lexi.yylex();
+            parsy.parse();
         }
          catch (Exception ex2){}
        //  lexi.valuestrue();

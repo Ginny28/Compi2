@@ -1,18 +1,16 @@
 package GXML;
 
 import java.lang.System;
+import java_cup.runtime.*;
 
 
-
-class Yytoken {
-  Yytoken () {}
-}
 
 %%
 
 %public
 %line
 %char
+%cup
 %ignorecase
 %state COMENTARIO
 %state COMENTARIODOUBLE
@@ -41,79 +39,80 @@ BA= "boton"
 BC= "<""/""boton"">"
 EA= "enviar"
 EC= "<""/""enviar"">"
+HEXA = "#"("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"a"|"b"|"c"|"d"|"e"|"f")*
 %%
 
-<YYINITIAL> {IA} {System.out.println("importa");}
-<YYINITIAL> {IC} {System.out.println("importc");}
-<YYINITIAL> {VA} {System.out.println("vena");}
-<YYINITIAL> {VC} {System.out.println("venc");}
-<YYINITIAL> {CA} {System.out.println("conta");}
-<YYINITIAL> {CC} {System.out.println("contc");}
-<YYINITIAL> {TA} {System.out.println("txta");}
-<YYINITIAL> {TC} {System.out.println("txtc");}
-<YYINITIAL> {COA} {System.out.println("ctra");}
-<YYINITIAL> {COC} {System.out.println("ctrc");}
-<YYINITIAL> {LA} {System.out.println("la");}
-<YYINITIAL> {LC} {System.out.println("lc");}
-<YYINITIAL> {DA} {System.out.println("da");}
-<YYINITIAL> {DC} {System.out.println("dc");}
-<YYINITIAL> {DEA} {System.out.println("defa");}
-<YYINITIAL> {DEC} {System.out.println("defc");}
-<YYINITIAL> {MA} {System.out.println("mula");}
-<YYINITIAL> {MC} {System.out.println("mulc");}
-<YYINITIAL> {BA} {System.out.println("bota");}
-<YYINITIAL> {BC} {System.out.println("botc");}
-<YYINITIAL> {EA} {System.out.println("snda");}
-<YYINITIAL> {EC} {System.out.println("sndc");}
+<YYINITIAL> {IA} {return new Symbol(sym.impO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {IC} {return new Symbol(sym.impC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {VA} {return new Symbol(sym.winO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {VC} {return new Symbol(sym.winC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {CA} {return new Symbol(sym.contaiO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {CC} {return new Symbol(sym.contaiC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {TA} {return new Symbol(sym.txtO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {TC} {return new Symbol(sym.txtC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {COA} {return new Symbol(sym.ctrlO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {COC} {return new Symbol(sym.ctrlC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {LA} {return new Symbol(sym.listO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {LC} {return new Symbol(sym.listC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {DA} {return new Symbol(sym.dataO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {DC} {return new Symbol(sym.dataC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {DEA} {return new Symbol(sym.defO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {DEC} {return new Symbol(sym.defC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {MA} {return new Symbol(sym.multO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {MC} {return new Symbol(sym.multC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {BA} {return new Symbol(sym.buttO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {BC} {return new Symbol(sym.buttC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {EA} {return new Symbol(sym.sendO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {EC} {return new Symbol(sym.sendC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {HEXA} {return new Symbol(sym.HEXA,yyline,yychar,new String(yytext()));}
 
-<YYINITIAL> "id" {System.out.println("id");}
-<YYINITIAL> "tipo" {System.out.println("tpo");}
-<YYINITIAL> "principal" {System.out.println("prin");}
-<YYINITIAL> "secundaria" {System.out.println("sec");}
-<YYINITIAL> "color" {System.out.println("col");}
-<YYINITIAL> "accioninicial" {System.out.println("init");}
-<YYINITIAL> "accionfinal"  {System.out.println("fin");}
-<YYINITIAL> "x" {System.out.println("x");}
-<YYINITIAL> "y" {System.out.println("y");}
-<YYINITIAL> "alto" {System.out.println("high");}
-<YYINITIAL> "ancho" {System.out.println("width");}
-<YYINITIAL> "borde" {System.out.println("border");}
-<YYINITIAL> "verdadero" {System.out.println("true");}
-<YYINITIAL> "falso" {System.out.println("false");}
-<YYINITIAL> "nombre" {System.out.println("name");}
-<YYINITIAL> "fuente" {System.out.println("font");}
-<YYINITIAL> "tam" {System.out.println("size");}
-<YYINITIAL> "negrita" {System.out.println("bold");}
-<YYINITIAL> "cursiva" {System.out.println("italic");}
-<YYINITIAL> "numerico" {System.out.println("numer");}
-<YYINITIAL> "textoarea" {System.out.println("area");}
-<YYINITIAL> "desplegable" {System.out.println("desp");}
-<YYINITIAL> "maximo" {System.out.println("max");}
-<YYINITIAL> "minimo" {System.out.println("min");}
-<YYINITIAL> "accion" {System.out.println("action");}
-<YYINITIAL> "referencia" {System.out.println("ref");}
-<YYINITIAL> "musica" {System.out.println("musica");}
-<YYINITIAL> "video" {System.out.println("video");}
-<YYINITIAL> "imagen" {System.out.println("imagen");}
-<YYINITIAL> "path" {System.out.println("path");}
-<YYINITIAL> "auto-reproduccion" {System.out.println("autoplay");}
+<YYINITIAL> "id" {return new Symbol(sym.id,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "tipo" {return new Symbol(sym.tipo,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "principal" {return new Symbol(sym.first,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "secundaria" {return new Symbol(sym.second,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "color" {return new Symbol(sym.color,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "accioninicial" {return new Symbol(sym.Ainit,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "accionfinal"  {return new Symbol(sym.Aend,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "x" {return new Symbol(sym.posX,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "y" {return new Symbol(sym.posY,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "alto" {return new Symbol(sym.high,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "ancho" {return new Symbol(sym.width,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "borde" {return new Symbol(sym.border,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "verdadero" {return new Symbol(sym.verdad,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "falso" {return new Symbol(sym.falso,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "nombre" {return new Symbol(sym.nome,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "fuente" {return new Symbol(sym.font,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "tam" {return new Symbol(sym.tam,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "negrita" {return new Symbol(sym.bold,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "cursiva" {return new Symbol(sym.italic,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "numerico" {return new Symbol(sym.numeric,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "textoarea" {return new Symbol(sym.txtarea,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "desplegable" {return new Symbol(sym.desp,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "maximo" {return new Symbol(sym.max,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "minimo" {return new Symbol(sym.mini,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "accion" {return new Symbol(sym.act,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "referencia" {return new Symbol(sym.refe,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "musica" {return new Symbol(sym.musica,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "video" {return new Symbol(sym.video,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "imagen" {return new Symbol(sym.img,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "path" {return new Symbol(sym.path,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "auto-reproduccion" {return new Symbol(sym.autoplay,yyline,yychar,new String(yytext()));}
 
 
-<YYINITIAL> "," {System.out.println("coma"); }
-<YYINITIAL> "+" {System.out.println("plus"); }
-<YYINITIAL> "*" {System.out.println("por"); }
-<YYINITIAL> "-" {System.out.println("guion"); }
-<YYINITIAL> "(" {System.out.println("pabi"); }
-<YYINITIAL> ")" {System.out.println("pcer"); }
-<YYINITIAL> "<" {System.out.println("abi"); }
-<YYINITIAL> ">" {System.out.println("cer"); }
-<YYINITIAL> "\"" {System.out.println("comi"); }
-<YYINITIAL> "{" {System.out.println("{"); }
-<YYINITIAL> "}" { System.out.println("}"); }
-<YYINITIAL> "=" {System.out.println("EQUAL");}
-<YYINITIAL>  {NUMBER} {System.out.println("NUMERO");}
-<YYINITIAL> "'" {System.out.println("COMILLA");}
-<YYINITIAL> {LETRAS} {System.out.println("LETRA");}
+<YYINITIAL> "," {return new Symbol(sym.coma,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "+" {return new Symbol(sym.plus,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "*" {return new Symbol(sym.por,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "-" {return new Symbol(sym.gion,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "(" {return new Symbol(sym.parA,yyline,yychar,new String(yytext())); }
+<YYINITIAL> ")" {return new Symbol(sym.parC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "<" {return new Symbol(sym.abi,yyline,yychar,new String(yytext())); }
+<YYINITIAL> ">" {return new Symbol(sym.cer,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "\"" {return new Symbol(sym.apos,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "{" {return new Symbol(sym.keyO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "}" { return new Symbol(sym.keyC,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "=" {return new Symbol(sym.equal,yyline,yychar,new String(yytext()));}
+<YYINITIAL>  {NUMBER} {return new Symbol(sym.nro,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {LETRAS} {return new Symbol(sym.letter,yyline,yychar,new String(yytext()));}
 <YYINITIAL> [\n] 		{yychar=0;}
 <YYINITIAL>  [" "\t\r]+ {}
 
