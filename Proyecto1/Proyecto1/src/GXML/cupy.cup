@@ -1,0 +1,71 @@
+package GXML;
+
+import java_cup.runtime.*;
+import java.lang.*;
+import java.util.*;
+import java.io.*;
+
+parser code {:
+
+public static void main(String args[]) throws Exception {
+
+// La clase Yylex es creada por el analizador léxico
+
+new parser(new Yylex(new BufferedReader(new InputStreamReader(System.in)))).parse();
+}
+
+public void syntax_error(Symbol s){
+        System.out.println("Error en la Columna " + (s.right+1) +" fila "+s.left+ ". Identificador "
++s.value  );
+}
+public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{
+        System.out.println("Error en la Columna " + (s.right+1)+ "fila "+s.left+". Identificador " +
+s.value + " no reconocido.");
+}
+:}
+
+
+
+/*Terminales de cabecera */
+
+terminal String HEXA,coma,plus,por,gion,parA,parC,abi,cer,apos,keyO,keyC,equal,nro,letter,slash;
+
+//initial
+nonterminal LENGUA,BINIT,BODY,LETRAS,ATRIBUTO,Bcositas;
+
+
+
+
+// Aquí irá comecar o lenguagem!!
+
+start with LENGUA;
+
+LENGUA ::= BINIT;
+
+
+// inicio ventana
+
+BINIT ::= abi letter ATRIBUTO cer BODY abi slash letter cer
+          |letter
+          |error;
+
+BODY::= BODY BINIT
+          |BINIT;
+
+
+ATRIBUTO ::=  ATRIBUTO letter equal apos Bcositas apos
+             |ATRIBUTO letter equal nro
+             |ATRIBUTO letter equal keyO Bcositas keyC
+             |error
+             ;
+
+
+Bcositas ::= letter
+             |nro
+             |HEXA
+             |coma
+             |plus
+             |por
+             |gion
+             |parA
+             |parC;
