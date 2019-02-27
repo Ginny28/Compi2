@@ -43,7 +43,8 @@ public static String GotValues(NodoGxml r)
     {
         for (int i = 0; i < r.getFilhos().size(); i++) 
         {
-            node += r.getValor().hashCode()+"->"+r.getFilhos().get(i).getValor().hashCode()+"; \n";
+            node += r.getIdunique()+ "[ label = \"VENTANA\" ]";
+            node += r.getIdunique()+"->"+r.getFilhos().get(i).getValor().hashCode()+"; \n";
             GotValues(r.getFilhos().get(i));
         }
     }
