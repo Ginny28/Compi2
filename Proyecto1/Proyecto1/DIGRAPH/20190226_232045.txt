@@ -1,0 +1,10 @@
+digraph g{ R->control; 
+R->Control; 
+R->contenedor; 
+R->Control; 
+R->Control; 
+R->Contenedor; 
+R->Enviar; 
+R->Contenedor; 
+R->ventana; 
+}

@@ -15,7 +15,7 @@ public class Proyecto1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        PanelInit pi = new PanelInit();
+        Janela pi = new Janela();
         pi.show();
         // TODO code application logic here
     }

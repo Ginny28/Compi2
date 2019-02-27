@@ -31,7 +31,7 @@ s.value + " no reconocido.");
 terminal String HEXA,coma,plus,por,gion,parA,parC,abi,cer,apos,keyO,keyC,equal,nro,letter,slash;
 
 //initial
-nonterminal lengua,Binit,Bdec,Brecu,BvenOptR,Bcositas,BvenOpt;
+nonterminal lengua,Binit,B,Cuerpo,Atributos,Bcositas,Valor,BcositasR;
 
 
 
@@ -45,23 +45,31 @@ lengua ::= Binit:e {:System.out.println("salida:"+ e);:} ;
 
 // inicio ventana
 
-Binit::=Bdec;
+Binit::=B;
 
-Bdec::= abi letter BvenOptR cer Brecu abi slash letter cer
-	       |error{::};
-
-
-Brecu::= Brecu Bdec
-         Bdec;
+	B::= 	 abi letter Atributos cer Cuerpo abi slash letter cer
+			|abi letter  cer Cuerpo abi slash letter cer
+			|abi letter Atributos cer abi slash letter cer
+		    |error{::};
 
 
+Cuerpo::= Cuerpo B
+          |B
+          |BcositasR;
 
-BvenOptR ::= BvenOptR BvenOpt
-         		|BvenOpt;
 
 
-BvenOpt ::= letter equal apos Bcositas apos
-            |letter equal keyO Bcositas keyC;
+Atributos ::= 	Atributos Valor
+         		|Valor;
+
+
+Valor ::=   letter equal apos BcositasR apos
+            |letter equal keyO BcositasR keyC
+            |letter equal nro;
+
+BcositasR ::= BcositasR Bcositas
+			  |Bcositas;
+
 
 Bcositas ::= letter
              |nro

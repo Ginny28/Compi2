@@ -27,7 +27,7 @@ s.value + " no reconocido.");
 
 action code {:
 ArrayList vars= new ArrayList();
-List <NodoGxml> filhos = new ArrayList();
+  ArrayList  values = new ArrayList();
 
 :}
 
@@ -41,7 +41,7 @@ terminal String HEXA,coma,plus,por,gion,parA,parC,abi,cer,apos,keyO,keyC,equal,n
 
 //initial
 nonterminal lengua,Binit,B,Cuerpo,Atributos,Bcositas,Valor,BcositasR;
-nonterminal tag;
+nonterminal NodoGXML tag;
 
 
 
@@ -49,9 +49,7 @@ nonterminal tag;
 
 start with lengua;
 
-lengua ::= Binit{:System.out.println("analisis finalizado!");
-// NodoGxml root = new NodoGxml("R");
-:};
+lengua ::= Binit{:System.out.println("analisis finalizado!");:};
 
 
 
@@ -60,9 +58,9 @@ lengua ::= Binit{:System.out.println("analisis finalizado!");
 Binit::=B;
 
 
-B::=  abi tag:m Atributos cer Cuerpo abi slash tag:s cer {://filhos.add(m);:}
-			|abi tag:m cer Cuerpo abi slash tag:s cer{:System.out.println(m+"--"+s);// filhos.add(m);:}
-			|abi tag:m Atributos cer abi slash tag:s cer{:System.out.println(m+"--"+s); //filhos.add(m);:}
+B::=  abi tag:m Atributos cer Cuerpo abi slash tag:s cer {:System.out.println(m+"--"+s);:}
+			|abi tag:m cer Cuerpo abi slash tag:s cer{:System.out.println(m+"--"+s);:}
+			|abi tag:m Atributos cer abi slash tag:s cer{:System.out.println(m+"--"+s);:}
 		  ;
 
 
@@ -83,7 +81,7 @@ tag ::=  letter:m{:RESULT =m;:};
 
 
 
-BcositasR ::= BcositasR:p Bcositas:m{:RESULT = m +""+p;:}
+BcositasR ::= BcositasR:p Bcositas:m{:RESULT = m +"" p;:}
               |Bcositas:m{:RESULT = m;:};
 
 Bcositas ::= letter:x{:RESULT= x;:}

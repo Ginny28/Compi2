@@ -1,0 +1,70 @@
+package GXML;
+
+import java.lang.System;
+import java_cup.runtime.*;
+
+
+
+%%
+
+%public
+%line
+%char
+%cup
+%ignorecase
+%state COMENTARIO
+%state COMENTARIODOUBLE
+%state CADENA
+
+LETRAS = [a-zA-z]+
+NUMBER = [1-9][0-9]*
+
+HEXA = "#"("0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"|"a"|"b"|"c"|"d"|"e"|"f")*
+
+%{
+String texto = "";
+%}
+
+%%
+
+
+
+
+
+<YYINITIAL> {HEXA} {return new Symbol(sym.HEXA,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "," {return new Symbol(sym.coma,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "+" {return new Symbol(sym.plus,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "*" {return new Symbol(sym.por,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "-" {return new Symbol(sym.gion,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "(" {return new Symbol(sym.parA,yyline,yychar,new String(yytext())); }
+<YYINITIAL> ")" {return new Symbol(sym.parC,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "<" {return new Symbol(sym.abi,yyline,yychar,new String(yytext())); }
+<YYINITIAL> ">" {return new Symbol(sym.cer,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "\"" {return new Symbol(sym.apos,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "{" {return new Symbol(sym.keyO,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "}" { return new Symbol(sym.keyC,yyline,yychar,new String(yytext())); }
+<YYINITIAL> "=" {return new Symbol(sym.equal,yyline,yychar,new String(yytext()));}
+<YYINITIAL> "/" {return new Symbol(sym.slash,yyline,yychar,new String(yytext()));}
+<YYINITIAL>  {NUMBER} {return new Symbol(sym.nro,yyline,yychar,new String(yytext()));}
+<YYINITIAL> {LETRAS} {return new Symbol(sym.letter,yyline,yychar,new String(yytext()));}
+<YYINITIAL> [\n] 		{yychar=0;}
+<YYINITIAL>  [" "\t\r]+ {}
+
+
+
+
+<YYINITIAL> "##" {yybegin(COMENTARIO);}
+<COMENTARIO> [^\n] {}
+<COMENTARIO> [\n] {yybegin(YYINITIAL); yychar=0; System.out.println("simplecoment");}
+
+<YYINITIAL> "#$" {yybegin(COMENTARIODOUBLE); }
+<COMENTARIODOUBLE> [\n\t\r]+  {}
+<COMENTARIODOUBLE> [^"*"]	{}
+<COMENTARIODOUBLE> "$#"  {yybegin(YYINITIAL); yychar=0; System.out.println("multiblecoment");}
+
+
+.
+  {
+    System.out.println("error lexico en "  + yyline + "," + yychar + " No se reconoce " + yytext());
+    yychar=0;
+  }

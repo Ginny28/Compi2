@@ -1,13 +1,10 @@
 package proyecto1;
 
-import java.awt.TextArea;
 import java.io.*;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import java.io.FilenameFilter;
 import java.util.ArrayList;
-import javax.swing.JTree;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -26,38 +23,30 @@ public class Tudo {
    
    ArrayList fil = new ArrayList();
  
-public void Open(JTextArea area)
+    DefaultMutableTreeNode Open()
     {
-    String Nome ="";
-    String filters[] ={"gxml","fs"};       
+    DefaultMutableTreeNode Nome = null;
+    String filters[] ={"gxml","fs"};    
     FileNameExtensionFilter f = new FileNameExtensionFilter("Kinds of Files",filters);
         JFileChooser jf = new JFileChooser();
         jf.setFileFilter(f);
         int files = jf.showOpenDialog(null);
         if (files == JFileChooser.APPROVE_OPTION)
         {
+           
             nomeArquivo= jf.getSelectedFile().getPath();
-            Nome = jf.getSelectedFile().getName();
-            try{
-                BufferedReader br = new BufferedReader(new FileReader(jf.getSelectedFile().getPath()));
-                String line= br.readLine();
-                while (line!= null) 
-                {
-                    
-                    area.append(line+"\n");
-                    line = br.readLine();
-                }
-            } catch (IOException ex) 
-            {
-            }
+            fil.add(jf.getSelectedFile().getAbsolutePath());
+            Nome = new DefaultMutableTreeNode( jf.getSelectedFile().getName());
+                     
         }
+        return Nome;
     }
 
     public void New(JTextArea area)
     {
   
-    FileNameExtensionFilter f = new FileNameExtensionFilter("GXML", "gxml");
-    FileNameExtensionFilter f1 = new FileNameExtensionFilter("FunctionScript", "fs");
+    FileNameExtensionFilter f = new FileNameExtensionFilter("GXML", "xml");
+    FileNameExtensionFilter f1 = new FileNameExtensionFilter("FuncionScript", "fs");
       
     JFileChooser jf = new JFileChooser();
         
@@ -121,19 +110,20 @@ public void Open(JTextArea area)
                    writes.write(area.getText());
                 writes.close();
            }
-           else if(Descrição.equalsIgnoreCase("FunctionScript"))
+           else if(Descrição.equalsIgnoreCase("FuncioScript"))
            {
                writes = new BufferedWriter(new FileWriter(jf.getSelectedFile().getCanonicalPath()+".fs"));
                   writes.write(area.getText());
                 writes.close();
-           }    
+           }
+           
          }
      catch(IOException ex){ex.printStackTrace();}
     
     
          }
 
-    }
-    
-    
+    } 
+  
+
 }
