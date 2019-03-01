@@ -17,15 +17,18 @@ import java.util.Calendar;
  */
 public class TreeGxml {
     
+    
+public static String nodos ="";
 public static void Graphic(NodoGxml root)
     {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-        String fileContent = "digraph g{ " +GotValues(root) +"}";
+        //String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        String cadena ="";
+        String fileContent = "digraph g{ " +GotValues(root,cadena) +"}";
         System.out.println("s:" + fileContent);
         try {
             File directorio = new File("DIGRAPH");
             directorio.mkdir();
-            BufferedWriter writer = new BufferedWriter(new FileWriter("DIGRAPH/" + timeStamp + ".txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("DIGRAPH/" + "diag" + ".txt"));
             writer.write(fileContent);
             writer.close();
         } catch (Exception e) {
@@ -35,23 +38,23 @@ public static void Graphic(NodoGxml root)
 
     
    
-public static String GotValues(NodoGxml r)
-{  
-     //node1 -> node2 ;
-    String node ="";
+public static String GotValues(NodoGxml r,String v)
+{
     if(r.getFilhos() != null)
     {
         for (int i = 0; i < r.getFilhos().size(); i++) 
         {
-            node += r.getIdunique()+ "[ label = \"VENTANA\" ]";
-            node += r.getIdunique()+"->"+r.getFilhos().get(i).getValor().hashCode()+"; \n";
-            GotValues(r.getFilhos().get(i));
+            v += r.getIdunique()+"[label="+r.getValor()+"];\n";
+            v += r.getFilhos().get(i).getIdunique()+"[label="+r.getFilhos().get(i).getValor()+"];\n";
+            v += r.getIdunique()+"->"+r.getFilhos().get(i).getIdunique()+"; \n";
+          //  System.out.println("value:"+v);
+            GotValues(r.getFilhos().get(i),v);
         }
     }
     
     
     
-    return node;
+    return v;
   
 }
 }

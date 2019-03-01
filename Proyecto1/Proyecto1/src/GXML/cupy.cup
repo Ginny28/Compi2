@@ -27,8 +27,7 @@ s.value + " no reconocido.");
 
 action code {:
 ArrayList vars= new ArrayList();
-List <NodoGxml> filhos = new ArrayList();
-
+NodoGxml root = new NodoGxml("R");
 :}
 
 
@@ -40,8 +39,8 @@ List <NodoGxml> filhos = new ArrayList();
 terminal String HEXA,coma,plus,por,gion,parA,parC,abi,cer,apos,keyO,keyC,equal,nro,letter,slash;
 
 //initial
-nonterminal lengua,Binit,B,Cuerpo,Atributos,Bcositas,Valor,BcositasR;
-nonterminal tag;
+nonterminal lengua,Binit,Cuerpo,Atributos,Bcositas,Valor,BcositasR;
+nonterminal NodoGxml tag,B;
 
 
 
@@ -49,25 +48,40 @@ nonterminal tag;
 
 start with lengua;
 
-lengua ::= Binit{:System.out.println("analisis finalizado!");
-// NodoGxml root = new NodoGxml("R");
+lengua ::= Binit:s
+{:
+    System.out.println("analisis finalizado!");
+    root.setValor("R");
+    TreeGxml.Graphic(root);
+
 :};
 
 
 
 // inicio ventana
 
-Binit::=B;
+Binit::=B:m{:RESULT = m;
+             root.AddFilho(m);:};
 
 
-B::=  abi tag:m Atributos cer Cuerpo abi slash tag:s cer {://filhos.add(m);:}
-			|abi tag:m cer Cuerpo abi slash tag:s cer{:System.out.println(m+"--"+s);// filhos.add(m);:}
-			|abi tag:m Atributos cer abi slash tag:s cer{:System.out.println(m+"--"+s); //filhos.add(m);:}
+B::=  abi tag:m Atributos cer Cuerpo:q abi slash tag:s cer
+                  {:
+                  RESULT = m;
+                   System.out.println("-->"+ RESULT.getValor());
+                  :}
+			|abi tag:m cer Cuerpo abi slash tag:s cer
+                  {:
+                    //root.AddFilho(m);
+                  :}
+			|abi tag:m Atributos cer abi slash tag:s cer
+                  {:
+                   //root.AddFilho(m);
+                  :}
 		  ;
 
 
-Cuerpo::= Cuerpo B
-          |B
+Cuerpo::= Cuerpo B:m{:System.out.println("estoy aquí: "+ m);:}
+          |B:m{:System.out.println("estoy aquí: "+ m);:}
           |BcositasR
           ;
 
@@ -79,7 +93,8 @@ Valor ::=    letter:m equal apos BcositasR:s apos {:RESULT = "attr:"+m + " val:"
             |letter:m equal keyO BcositasR:s keyC {:RESULT = "attr:"+m + " val:"+s; :}
             |letter:m equal nro:s  {:RESULT = "attr:"+m + "val:"+s; :};
 
-tag ::=  letter:m{:RESULT =m;:};
+tag ::=  letter:m{:RESULT = new NodoGxml();
+                   RESULT.setValor(m);:};
 
 
 

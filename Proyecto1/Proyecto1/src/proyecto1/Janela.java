@@ -252,6 +252,7 @@ ArrayList <DefaultMutableTreeNode> nomes = new ArrayList<DefaultMutableTreeNode>
  }
  
  jTree1.updateUI();
+ jTree1.expandPath(new TreePath(pai.getPath()));
  jTabbedPane1.setEnabledAt(1, false);
  jTabbedPane1.setEnabledAt(2, false);
  

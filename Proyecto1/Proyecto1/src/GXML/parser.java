@@ -36,14 +36,14 @@ public class parser extends java_cup.runtime.lr_parser {
   protected static final short _production_table[][] = 
     unpackFromStrings(new String[] {
     "\000\032\000\002\002\004\000\002\002\003\000\002\003" +
-    "\003\000\002\004\013\000\002\004\012\000\002\004\012" +
-    "\000\002\005\004\000\002\005\003\000\002\005\003\000" +
-    "\002\006\004\000\002\006\003\000\002\010\007\000\002" +
-    "\010\007\000\002\010\005\000\002\012\003\000\002\011" +
-    "\004\000\002\011\003\000\002\007\003\000\002\007\003" +
-    "\000\002\007\003\000\002\007\003\000\002\007\003\000" +
-    "\002\007\003\000\002\007\003\000\002\007\003\000\002" +
-    "\007\003" });
+    "\003\000\002\012\013\000\002\012\012\000\002\012\012" +
+    "\000\002\004\004\000\002\004\003\000\002\004\003\000" +
+    "\002\005\004\000\002\005\003\000\002\007\007\000\002" +
+    "\007\007\000\002\007\005\000\002\011\003\000\002\010" +
+    "\004\000\002\010\003\000\002\006\003\000\002\006\003" +
+    "\000\002\006\003\000\002\006\003\000\002\006\003\000" +
+    "\002\006\003\000\002\006\003\000\002\006\003\000\002" +
+    "\006\003" });
 
   /** Access to production table. */
   public short[][] production_table() {return _production_table;}
@@ -112,26 +112,26 @@ public class parser extends java_cup.runtime.lr_parser {
   /** <code>reduce_goto</code> table. */
   protected static final short[][] _reduce_table = 
     unpackFromStrings(new String[] {
-    "\000\062\000\010\002\003\003\004\004\005\001\001\000" +
+    "\000\062\000\010\002\003\003\004\012\005\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\004" +
-    "\012\007\001\001\000\006\006\012\010\014\001\001\000" +
-    "\002\001\001\000\002\001\001\000\004\010\040\001\001" +
-    "\000\012\004\015\005\031\007\016\011\024\001\001\000" +
+    "\011\007\001\001\000\006\005\012\007\014\001\001\000" +
+    "\002\001\001\000\002\001\001\000\004\007\040\001\001" +
+    "\000\012\004\031\006\016\010\024\012\015\001\001\000" +
     "\002\001\001\000\002\001\001\000\002\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\007\037\001\001\000\002" +
+    "\001\000\002\001\001\000\004\006\037\001\001\000\002" +
     "\001\001\000\002\001\001\000\002\001\001\000\002\001" +
-    "\001\000\004\004\032\001\001\000\002\001\001\000\004" +
-    "\012\007\001\001\000\004\012\035\001\001\000\002\001" +
+    "\001\000\004\012\032\001\001\000\002\001\001\000\004" +
+    "\011\007\001\001\000\004\011\035\001\001\000\002\001" +
     "\001\000\002\001\001\000\002\001\001\000\002\001\001" +
-    "\000\012\004\015\005\043\007\016\011\024\001\001\000" +
-    "\004\012\007\001\001\000\004\004\032\001\001\000\004" +
-    "\012\007\001\001\000\004\012\046\001\001\000\002\001" +
-    "\001\000\002\001\001\000\004\012\051\001\001\000\002" +
-    "\001\001\000\002\001\001\000\002\001\001\000\006\007" +
-    "\016\011\061\001\001\000\002\001\001\000\006\007\016" +
-    "\011\057\001\001\000\004\007\037\001\001\000\002\001" +
-    "\001\000\004\007\037\001\001\000\002\001\001\000\002" +
+    "\000\012\004\043\006\016\010\024\012\015\001\001\000" +
+    "\004\011\007\001\001\000\004\012\032\001\001\000\004" +
+    "\011\007\001\001\000\004\011\046\001\001\000\002\001" +
+    "\001\000\002\001\001\000\004\011\051\001\001\000\002" +
+    "\001\001\000\002\001\001\000\002\001\001\000\006\006" +
+    "\016\010\061\001\001\000\002\001\001\000\006\006\016" +
+    "\010\057\001\001\000\004\006\037\001\001\000\002\001" +
+    "\001\000\004\006\037\001\001\000\002\001\001\000\002" +
     "\001\001" });
 
   /** Access to <code>reduce_goto</code> table. */
@@ -195,10 +195,7 @@ class CUP$parser$actions {
 
 
 ArrayList vars= new ArrayList();
-List <NodoGxml> filhos = new ArrayList();
-NodoGxml root = new NodoGxml("R");
-
-
+NodoGxml root = new NodoGxml();
 
   private final parser parser;
 
@@ -239,9 +236,14 @@ NodoGxml root = new NodoGxml("R");
           case 1: // lengua ::= Binit 
             {
               Object RESULT =null;
-                
-		System.out.println("analisis finalizado!");
-                TreeGxml.Graphic(root);
+		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		Object s = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		
+    System.out.println("analisis finalizado!");
+    root.setValor("R");
+    TreeGxml.Graphic(root);
+
 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("lengua",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
@@ -251,7 +253,11 @@ NodoGxml root = new NodoGxml("R");
           case 2: // Binit ::= B 
             {
               Object RESULT =null;
-
+		int mleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		NodoGxml m = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		RESULT = m;
+                root.AddFilho(m);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("Binit",1, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -259,50 +265,55 @@ NodoGxml root = new NodoGxml("R");
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 3: // B ::= abi tag Atributos cer Cuerpo abi slash tag cer 
             {
-              Object RESULT =null;
+              NodoGxml RESULT =null;
 		int mleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).left;
 		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)).right;
-		Object m = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		NodoGxml m = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-7)).value;
+		int qleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).left;
+		int qright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)).right;
+		Object q = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-4)).value;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		//filhos.add(m);
-                
-                filhos.add(new NodoGxml(m.toString()));
-                root.setFilhos(filhos);
-                
-                
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("B",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		NodoGxml s = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                  RESULT = m;
+                  System.out.println("-->"+ RESULT.getValor());
+                  
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("B",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 4: // B ::= abi tag cer Cuerpo abi slash tag cer 
             {
-              Object RESULT =null;
+              NodoGxml RESULT =null;
 		int mleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
 		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).right;
-		Object m = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
+		NodoGxml m = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		System.out.println(m+"--"+s);// filhos.add(m);
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("B",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		NodoGxml s = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                    //root.AddFilho(m);
+                  
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("B",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 5: // B ::= abi tag Atributos cer abi slash tag cer 
             {
-              Object RESULT =null;
+              NodoGxml RESULT =null;
 		int mleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).left;
 		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)).right;
-		Object m = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
+		NodoGxml m = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-6)).value;
 		int sleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).left;
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
-		Object s = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
-		System.out.println(m+"--"+s); //filhos.add(m);
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("B",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		NodoGxml s = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
+		
+                   //root.AddFilho(m);
+                  
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("B",8, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-7)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -310,8 +321,11 @@ NodoGxml root = new NodoGxml("R");
           case 6: // Cuerpo ::= Cuerpo B 
             {
               Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Cuerpo",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		int mleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		NodoGxml m = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		System.out.println("estoy aquí: "+ m);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Cuerpo",2, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -319,8 +333,11 @@ NodoGxml root = new NodoGxml("R");
           case 7: // Cuerpo ::= B 
             {
               Object RESULT =null;
-
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Cuerpo",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		int mleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		NodoGxml m = (NodoGxml)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		System.out.println("estoy aquí: "+ m);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Cuerpo",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -329,7 +346,7 @@ NodoGxml root = new NodoGxml("R");
             {
               Object RESULT =null;
 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Cuerpo",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Cuerpo",2, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -341,7 +358,7 @@ NodoGxml root = new NodoGxml("R");
 		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object l = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		System.out.println();
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Atributos",4, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Atributos",3, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -353,7 +370,7 @@ NodoGxml root = new NodoGxml("R");
 		int lright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object l = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		System.out.println();
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Atributos",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Atributos",3, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -368,7 +385,7 @@ NodoGxml root = new NodoGxml("R");
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		Object s = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		RESULT = "attr:"+m + " val:"+s; 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Valor",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Valor",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -383,7 +400,7 @@ NodoGxml root = new NodoGxml("R");
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)).right;
 		Object s = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-1)).value;
 		RESULT = "attr:"+m + " val:"+s; 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Valor",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Valor",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-4)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -398,19 +415,20 @@ NodoGxml root = new NodoGxml("R");
 		int sright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String s = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT = "attr:"+m + "val:"+s; 
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Valor",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Valor",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
           /*. . . . . . . . . . . . . . . . . . . .*/
           case 14: // tag ::= letter 
             {
-              Object RESULT =null;
+              NodoGxml RESULT =null;
 		int mleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String m = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		RESULT =m;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("tag",8, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+		RESULT = new NodoGxml();
+                RESULT.setValor(m);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("tag",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -425,7 +443,7 @@ NodoGxml root = new NodoGxml("R");
 		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object m = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT = m +""+p;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("BcositasR",7, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("BcositasR",6, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-1)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -437,7 +455,7 @@ NodoGxml root = new NodoGxml("R");
 		int mright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Object m = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT = m;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("BcositasR",7, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("BcositasR",6, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -449,7 +467,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -461,7 +479,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -473,7 +491,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -485,7 +503,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -497,7 +515,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -509,7 +527,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -521,7 +539,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -533,7 +551,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 
@@ -545,7 +563,7 @@ NodoGxml root = new NodoGxml("R");
 		int xright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String x = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
 		RESULT= x;
-              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",5, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
+              CUP$parser$result = parser.getSymbolFactory().newSymbol("Bcositas",4, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
 

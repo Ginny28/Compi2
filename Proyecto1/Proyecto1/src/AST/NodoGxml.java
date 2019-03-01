@@ -7,6 +7,7 @@ package AST;
 
 import java.util.List;
 import java.lang.Object;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -29,19 +30,22 @@ public class NodoGxml {
         this.valor = valor;
     }
     private String valor;
-    private  int idunique;
-    //private NodoGxml pai;
-    private List<NodoGxml> filhos;
+    private  int idunique = this.hashCode();
+    private List<NodoGxml> filhos = new ArrayList<>();
     
     // -- atributos --//
     private String id = "";
     private String tipo="";
 
-    public NodoGxml(String valor) {
-        this.valor = valor;
-        this.setIdunique((int) (valor.hashCode()+ Math.random()));
+    public NodoGxml() {
+        
     }
 
+    public void AddFilho(NodoGxml filho)
+    {
+        this.filhos.add(filho);
+    }
+    
     
     /**
      * @return the filhos
